@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\RegisterController;
 use App\Http\Controllers\Api\BukuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,12 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::controller(RegisterController::class)->group(function(){
+    Route::post('admin/register','register');
+    Route::post('admin/login','login');
+    Route::get('admin/','index');
 });
 
-Route::get('buku',[BukuController::class, 'index']);
-Route::get('buku/{id}',[BukuController::class, 'show']);
-Route::post('buku',[BukuController::class, 'store']);
-Route::put('buku/{id}',[BukuController::class, 'update']);
-Route::delete('buku/{id}',[BukuController::class, 'destroy']);
+
+Route::controller(BukuController::class)->group(function(){
+    Route::get('buku','index');
+    Route::get('buku/{id}','show');
+    Route::post('buku/','store');
+    Route::post('buku/{id}','update');
+    Route::delete('buku/{id}','destroy');
+});

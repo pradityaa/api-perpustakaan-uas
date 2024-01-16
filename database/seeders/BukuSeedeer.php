@@ -20,6 +20,7 @@ class BukuSeedeer extends Seeder
                 'judul'=>$faker->sentence,
                 'pengarang'=>$faker->name,
                 'tanggal_publikasi'=>$faker->date,
+                'sinopsis'=>$faker->sentence,
             ]);
         }
     }

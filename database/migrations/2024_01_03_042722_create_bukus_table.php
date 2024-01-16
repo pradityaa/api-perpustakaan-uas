@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('judul');
             $table->string('pengarang');
             $table->string('tanggal_publikasi');
+            $table->string('sinopsis');
             $table->string('foto')->nullable();
             $table->timestamps();
         });

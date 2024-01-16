@@ -35,6 +35,7 @@ class BukuController extends Controller
             'judul' => 'required',
             'pengarang' => 'required',
             'tanggal_publikasi' => 'required|date',
+            'sinopsis' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
@@ -50,6 +51,7 @@ class BukuController extends Controller
         $dataBuku -> judul = $request -> input('judul');
         $dataBuku -> pengarang = $request -> input('pengarang');
         $dataBuku -> tanggal_publikasi = $request -> input('tanggal_publikasi');
+        $dataBuku -> sinopsis = $request -> input('sinopsis');
 
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
@@ -94,7 +96,7 @@ class BukuController extends Controller
     {
         $dataBuku = Buku::find($id);
     
-        if(empty($dataBuku)){
+        if(!$dataBuku){
             return response()->json([
                 'status'=> false,
                 'messages'=> 'data tidak ditemukan',
@@ -105,7 +107,8 @@ class BukuController extends Controller
             'judul' => 'required',
             'pengarang' => 'required',
             'tanggal_publikasi' => 'required|date',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'sinopsis' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     
         $validator = Validator::make($request->all(), $rules);
@@ -121,6 +124,7 @@ class BukuController extends Controller
         $dataBuku->judul = $request->input('judul');
         $dataBuku->pengarang = $request->input('pengarang');
         $dataBuku->tanggal_publikasi = $request->input('tanggal_publikasi');
+        $dataBuku->sinopsis = $request->input('sinopsis');
     
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
